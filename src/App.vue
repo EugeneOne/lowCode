@@ -3,8 +3,8 @@
     <div id="nav">
       <div draggable="true" @dragstart="dragstart" data-name="TST">TST</div>
       <div>
-        <mtd-button type="primary" draggable="true" @dragstart="dragstart" data-name="button"
-          >基础按钮</mtd-button
+        <mtdm-button type="primary" draggable="true" @dragstart="dragstart" data-name="button"
+          >基础按钮</mtdm-button
         >
       </div>
     </div>
@@ -53,7 +53,8 @@ export default {
       info.id = guid();
       let component = Object.assign(templateToDom(info), { id: info.id });
       this.components.push(component);
-      mount();
+      console.log(component);
+      mount(component.id, component);
     },
     draw() {
       // //挂载及更新视图中组件的位置信息
