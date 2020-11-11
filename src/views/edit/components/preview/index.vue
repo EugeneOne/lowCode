@@ -1,6 +1,6 @@
 <template>
-  <div id="app" @dragOver="dragOver">
-    <!-- <div id="nav">
+  <div class="preview-layout" @dragOver="dragOver">
+    <div id="nav">
       <div draggable="true" @dragstart="dragstart" data-name="TST">TST</div>
       <div @dragstart="dragstart" draggable="true" data-name="button">
         <mtdm-button type="primary">基础按钮</mtdm-button>
@@ -10,17 +10,18 @@
       </div>
     </div>
     <div class="content" @drop="drop">
+      <!-- <div v-for="(component, index) in components" :key="index" v-html="component.template"></div> -->
       <div v-for="(item, index) in components" :key="index" :id="item.id"></div>
-    </div> -->
-    <router-view />
+    </div>
   </div>
 </template>
 <script>
-import { templateToDom } from './components/template';
-import mount from './components/mount';
-import guid from './utils/guid';
+import { templateToDom } from '@components/template';
+import mount from '@components/mount';
+import guid from '@utils/guid';
 
 export default {
+  name: 'PreviewLayout',
   data() {
     return {
       components: [],
@@ -84,35 +85,29 @@ export default {
   },
 };
 </script>
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<style lang="scss">
+.preview-layout {
+  #nav > div {
+    padding: 30px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    line-height: center;
+  }
 
-#nav > div {
-  padding: 30px;
-  margin-bottom: 20px;
-  width: 100%;
-  height: 60px;
-  text-align: center;
-  line-height: center;
-}
+  #nav a {
+    font-weight: bold;
+    color: #2c3e50;
+  }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-.content {
-  height: 300px;
-  width: 100%;
-  border: 2px solid #000;
+  #nav a.router-link-exact-active {
+    color: #42b983;
+  }
+  .content {
+    height: 300px;
+    width: 100%;
+    border: 2px solid #000;
+  }
 }
 </style>

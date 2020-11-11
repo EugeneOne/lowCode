@@ -1,0 +1,19 @@
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flexDom($align: center, $row: center) {
+  display: flex;
+  justify-content: $row;
+  align-items: $align;
+}
+
+@mixin lineClam($line: 1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+}
