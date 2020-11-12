@@ -1,16 +1,12 @@
-import atom from './atom';
+import mtd from './mtd';
+
+const allTemplate = {
+  mtd,
+};
 
 const templateToDom = function(info, _attr = {}) {
-  let component = '';
-  // type: atom (原子组件) cell（细胞组件）
-  switch (info.type) {
-    case 'atom':
-      component = atom[info.name](_attr);
-      break;
-
-    default:
-      break;
-  }
+  if (!info.type || !info.ui) return;
+  let component = allTemplate[info.ui][info.type](_attr);
   return component;
 };
 

@@ -1,13 +1,23 @@
 module.exports = {
   css: {
     loaderOptions: {
-      sass: {
-        prependData: `@import "~@assets/styles/variable.scss";`,
+      scss: {
+        additionalData: `@import "~@/assets/styles/variable.scss";`,
       },
     },
   },
   chainWebpack: (config) => {
-    ['assets', 'components', 'filters', 'layouts', 'router', 'utils', 'views'].forEach((item) => {
+    [
+      'assets',
+      'components',
+      'config',
+      'store',
+      'filters',
+      'layouts',
+      'router',
+      'utils',
+      'views',
+    ].forEach((item) => {
       config.resolve.alias.set(`@${item}`, `${__dirname}/src/${item}`);
     });
 

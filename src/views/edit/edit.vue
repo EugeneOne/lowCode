@@ -3,7 +3,7 @@
     <mtd-container class="edit-container">
       <mtd-header>Header</mtd-header>
       <mtd-container>
-        <mtd-aside width="200px">
+        <mtd-aside width="150px">
           <component-menu />
         </mtd-aside>
         <mtd-main>

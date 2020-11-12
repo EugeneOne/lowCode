@@ -1,21 +1,21 @@
 <template>
   <div class="preview-layout" @dragOver="dragOver">
     <div id="nav">
-      <div draggable="true" @dragstart="dragstart" data-name="TST">TST</div>
+      <!-- <div draggable="true" @dragstart="dragstart" data-name="TST">TST</div>
       <div @dragstart="dragstart" draggable="true" data-name="button">
         <mtdm-button type="primary">基础按钮</mtdm-button>
       </div>
       <div @dragstart="dragstart" draggable="true" data-name="tag">
         <mtdm-tag size="middle" theme="primary">标签</mtdm-tag>
-      </div>
+      </div> -->
     </div>
     <div class="content" @drop="drop">
-      <!-- <div v-for="(component, index) in components" :key="index" v-html="component.template"></div> -->
       <div v-for="(item, index) in components" :key="index" :id="item.id"></div>
     </div>
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 import { templateToDom } from '@components/template';
 import mount from '@components/mount';
 import guid from '@utils/guid';
@@ -24,9 +24,12 @@ export default {
   name: 'PreviewLayout',
   data() {
     return {
-      components: [],
+      componentsList: [],
       activeUI: 'atom',
     };
+  },
+  computed: {
+    ...mapGetters(['components', 'currentComponent']),
   },
   mounted() {
     document.body.ondragover = (e) => {
@@ -42,12 +45,11 @@ export default {
       e.preventDefault();
     },
     dragstart(e) {
-      console.log(e);
       let componentName = e.target.getAttribute('data-name');
       let info = {
         name: componentName,
         type: this.activeUI,
-        ui: 'MTD',
+        ui: 'mtd',
       };
       e.dataTransfer.setData('info', JSON.stringify(info));
       console.log(e.dataTransfer.getData('info'));
@@ -56,7 +58,8 @@ export default {
       const info = JSON.parse(e.dataTransfer.getData('info')) || {};
       info.id = guid();
       let component = Object.assign(templateToDom(info), { id: info.id });
-      this.components.push(component);
+      this.$store.dispatch('addComponents', component);
+      // this.componentsList.push(component);
       mount(component.id, component);
     },
     draw() {
