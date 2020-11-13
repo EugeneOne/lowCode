@@ -1,14 +1,6 @@
 <template>
   <div class="preview-layout" @dragOver="dragOver">
-    <div id="nav">
-      <!-- <div draggable="true" @dragstart="dragstart" data-name="TST">TST</div>
-      <div @dragstart="dragstart" draggable="true" data-name="button">
-        <mtdm-button type="primary">基础按钮</mtdm-button>
-      </div>
-      <div @dragstart="dragstart" draggable="true" data-name="tag">
-        <mtdm-tag size="middle" theme="primary">标签</mtdm-tag>
-      </div> -->
-    </div>
+    <div id="nav"></div>
     <div class="content" @drop="drop">
       <div v-for="(item, index) in components" :key="index" :id="item.id"></div>
     </div>
