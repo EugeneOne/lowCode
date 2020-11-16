@@ -9,9 +9,11 @@
         <mtd-main>
           <preview />
         </mtd-main>
+        <mtd-aside width="150px">
+          <attributes-menu />
+        </mtd-aside>
       </mtd-container>
     </mtd-container>
-    <attributes-menu />
   </div>
 </template>
 

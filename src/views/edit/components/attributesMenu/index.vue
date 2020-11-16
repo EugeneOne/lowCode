@@ -1,5 +1,7 @@
 <template>
-  <div class="attributes-menu"></div>
+  <div class="attributes-menu">
+    属性
+  </div>
 </template>
 
 <script>

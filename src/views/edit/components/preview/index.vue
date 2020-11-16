@@ -49,10 +49,11 @@ export default {
     drop(e) {
       const info = JSON.parse(e.dataTransfer.getData('info')) || {};
       info.id = guid();
-      let component = Object.assign(templateToDom(info), { id: info.id });
-      this.$store.dispatch('addComponents', component);
-      // this.componentsList.push(component);
-      mount(component.id, component);
+      console.log('templateToDom(info):', templateToDom(info));
+      // let component = Object.assign(templateToDom(info), { id: info.id });
+      // this.$store.dispatch('addComponents', component);
+      // // this.componentsList.push(component);
+      // mount(component.id, component);
     },
     draw() {
       // //挂载及更新视图中组件的位置信息

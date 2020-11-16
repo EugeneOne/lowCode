@@ -1,34 +1,37 @@
-import { attrToString } from '../index';
-
-const handle = function(_attr) {
-  let attributes = {
-    size: {
-      value: 'middle',
-    },
-    type: {
-      value: 'default',
-    },
-    width: {
-      value: 'normal',
-    },
-    loading: {
-      value: false,
-    },
-    disabled: {
-      value: false,
-    },
-    icon: {
+export default {
+  type: 'button',
+  domHead: 'mtd-button',
+  attribute: {},
+  config: [
+    {
+      name: 'size',
+      type: String,
       value: '',
+      enum: ['small', '', 'large'],
     },
-    round: {
-      value: '',
+    {
+      name: 'htmlType',
+      type: String,
+      value: 'button',
+      enum: ['button', 'submit', 'reset'],
     },
-  };
-  Object.assign(attributes, _attr);
-  let content = '按钮';
-  const attrStr = attrToString(attributes);
-  const template = `<mtdm-button ${attrStr}>${content}</mtdm-button>`;
-  return { template };
+    {
+      name: 'loading',
+      type: Boolean,
+      value: false,
+      enum: [true, false],
+    },
+    {
+      name: 'disabled',
+      type: Boolean,
+      value: false,
+      enum: [true, false],
+    },
+    {
+      name: 'type',
+      type: String,
+      value: 'primary',
+      enum: ['primary', 'text', 'text-primary', 'success', 'warning', 'danger', ''],
+    },
+  ],
 };
-
-export default handle;

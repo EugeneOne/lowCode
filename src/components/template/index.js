@@ -1,4 +1,5 @@
 import mtd from './mtd';
+import { _clonedeep } from '@utils/utils';
 
 const allTemplate = {
   mtd,
@@ -6,7 +7,11 @@ const allTemplate = {
 
 const templateToDom = function(info, _attr = {}) {
   if (!info.type || !info.ui) return;
-  let component = allTemplate[info.ui][info.type](_attr);
+  let component = _clonedeep(allTemplate[info.ui][info.type]);
+  component.attributes = Object.assign(component.attributes, _attr);
+  // 属性
+  const attrStr = attrToString(component.attributes);
+  component.template = `<${component.domHead} ${attrStr}>${component.content}</${component.domHead}>`;
   return component;
 };
 

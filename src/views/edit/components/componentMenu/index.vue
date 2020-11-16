@@ -16,9 +16,7 @@
         :key="index"
       >
         {{ item.type }}
-        <!-- <component :is="currentView"></component> -->
       </li>
-      <!-- <li>{{ template }}</li> -->
     </ul>
   </div>
 </template>
@@ -30,7 +28,6 @@ export default {
   name: 'ComponentMenu',
   data() {
     return {
-      template: '<mtd-button type="primary">基础按钮</mtd-button>',
       componentsConfig,
       currentUiType: 'mtd',
       componentsList: [
