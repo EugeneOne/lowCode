@@ -23,6 +23,17 @@ export default {
   computed: {
     ...mapGetters(['components', 'currentComponent']),
   },
+  watch: {
+    components: {
+      handler: function(val, oldVal) {
+        console.log(val.length === oldVal.length);
+        if(val.length === oldVal.length) {
+          mount(this.currentComponent.id, this.currentComponent);
+        }
+      },
+      deep: true
+    }
+  },
   mounted() {
     document.body.ondragover = (e) => {
       e.preventDefault();
@@ -36,24 +47,17 @@ export default {
     dragOver(e) {
       e.preventDefault();
     },
-    dragstart(e) {
-      let componentName = e.target.getAttribute('data-name');
-      let info = {
-        name: componentName,
-        type: this.activeUI,
-        ui: 'mtd',
-      };
-      e.dataTransfer.setData('info', JSON.stringify(info));
-      console.log(e.dataTransfer.getData('info'));
-    },
     drop(e) {
       const info = JSON.parse(e.dataTransfer.getData('info')) || {};
       info.id = guid();
-      console.log('templateToDom(info):', templateToDom(info));
-      // let component = Object.assign(templateToDom(info), { id: info.id });
-      // this.$store.dispatch('addComponents', component);
-      // // this.componentsList.push(component);
-      // mount(component.id, component);
+      let component = Object.assign(templateToDom(info), { id: info.id });
+      this.updateCurrentComponent(component)
+    },
+    updateCurrentComponent(component) {
+      this.$store.dispatch('updateCurrentComponent', component).then(() => {
+        mount(this.currentComponent.id, this.currentComponent);
+      })
+      
     },
     draw() {
       // //挂载及更新视图中组件的位置信息

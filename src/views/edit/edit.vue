@@ -3,13 +3,13 @@
     <mtd-container class="edit-container">
       <mtd-header>Header</mtd-header>
       <mtd-container>
-        <mtd-aside width="150px">
+        <mtd-aside width="300px">
           <component-menu />
         </mtd-aside>
         <mtd-main>
           <preview />
         </mtd-main>
-        <mtd-aside width="150px">
+        <mtd-aside width="300px">
           <attributes-menu />
         </mtd-aside>
       </mtd-container>

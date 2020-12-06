@@ -6,11 +6,19 @@ const initialState = {
 };
 
 const actions = {
-  setCurrentComponent({ commit }, data) {
+  updateCurrentComponent({ commit, state }, data) {
     commit('SET_COMPONENT', data);
-  },
-  addComponents({ commit }, data) {
-    commit('SET_COMPONENT', data);
+    // const index = state.components.find(item => {
+    //   return item.id === data.id;
+    // })
+    // let components = state.components;
+    // if(index > -1) {
+    //   // 更新
+    //   components[index] = data;
+    // } else {
+    //   // 新增
+    //   components.push(data);
+    // }
     commit('UPDATE_COMPONENTS', data);
   },
 };
@@ -24,8 +32,19 @@ const mutations = {
   SET_COMPONENT(state, data = {}) {
     state.currentComponent = data;
   },
-  UPDATE_COMPONENTS(state, data = {}) {
-    state.components.push(data);
+  UPDATE_COMPONENTS(state, data = []) {
+    const index = state.components.find(item => {
+      return item.id === data.id;
+    })
+    let components = state.components;
+    if(index > -1) {
+      // 更新
+      components[index] = data;
+    } else {
+      // 新增
+      components.push(data);
+    }
+    state.components = components;
   },
 };
 

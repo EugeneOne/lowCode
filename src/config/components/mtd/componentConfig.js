@@ -2,12 +2,13 @@ const componentsList = [
   {
     type: 'button',
     domHead: 'mtd-button',
-    attribute: [],
+    content: '按钮',
+    attributes: {},
     config: [
       {
         name: 'size',
         type: String,
-        value: '',
+        value: 'small',
         enum: ['small', '', 'large'],
       },
       {
