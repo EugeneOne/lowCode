@@ -1,8 +1,20 @@
 <template>
   <div class="preview-layout" @dragOver="dragOver">
-    <div id="nav"></div>
+    <div id="nav">
+      <navs />
+    </div>
     <div class="content" @drop="drop">
-      <div v-for="(item, index) in components" :key="index" :id="item.id"></div>
+      <!-- 预览 -->
+      <div v-show="currentType === 'view'" class="view-type">
+        <div v-for="(item, index) in components" :key="index" :id="item.id"></div>
+      </div>
+      <!-- 源码 -->
+      <div v-show="currentType === 'code'" class="code-type">
+        <!-- {{ sourceCode }} -->
+        <highlightjs language="html" :code="sourceCode" />
+        <pre v-highlightjs="sourceCode"><code class="html"></code></pre>
+        <!-- <pre><code class="html">{{ sourceCode }}</code></pre> -->
+      </div>
     </div>
   </div>
 </template>
@@ -11,9 +23,11 @@ import { mapGetters } from 'vuex';
 import { templateToDom } from '@components/template';
 import mount from '@components/mount';
 import guid from '@utils/guid';
+import navs from './components/navs.vue'
 
 export default {
   name: 'PreviewLayout',
+  components: {navs},
   data() {
     return {
       componentsList: [],
@@ -21,7 +35,14 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['components', 'currentComponent']),
+    ...mapGetters(['components', 'currentComponent', 'currentType']),
+    sourceCode() {
+      let template = '<template>';
+      this.components.forEach(element => {
+        template += element.template
+      });
+      return `${template}</template>`
+    },
   },
   watch: {
     components: {
